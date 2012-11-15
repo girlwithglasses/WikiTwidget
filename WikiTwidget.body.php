@@ -2,38 +2,59 @@
 
 class WikiTwidget {
 
-	function createWidget($input, array $args, Parser $parser, PPFrame $frame ) {
+	function createWidget($input, array $args, Parser $parser, PPFrame $frame ) {	global $wgOut;
+		global $wgWikiTwidgetAccs;
 
-		$return_txt = '<a class="twitter-timeline" href="https://twitter.com/gmodproject" data-widget-id="268391087838728192"';
+		$name = 'blank';
+		$id = '';
 
-## The minimum width of a timeline is 220px and the maximum is 520px.
-## The minimum height is 350px.
+#		Widget URL format
+#		<a class="twitter-timeline" href="https://twitter.com/twitterapi" data-widget-id="YOUR-WIDGET-ID-HERE" data-theme="dark" data-link-color="#cc0000"  data-related="twitterapi,twitter" data-aria-polite="assertive" width="300" height="500" lang="EN">Tweets by @twitterapi</a>
 
-		if( isset( $args['width'] ) && $args['width'] ) {
-			$w = $args['width'];
-			## width should only contain numbers
-			if (preg_match('/\D/', $w))
-			{	return "<div class='error'>" . wfMessage( 'wikitwidget-h-w-err', htmlspecialchars($w)) . "</div>";
+		if (isset($args['data-widget-id']) && $args['data-widget-id']){
+			$id = $args['data-widget-id'];
+		}
+		else if(isset($wgWikiTwidgetAccs['id']) && $wgWikiTwidgetAccs['id']){
+			$id = $wgWikiTwidgetAccs['id'];
+		}
+		else {
+			## Error!!
+			return "<div class='error'>" . wfMessage( 'wikitwidget-no-id-err' ) . "</div>";
+		}
+		
+		## check that the ID looks OK
+		if (preg_match('/\D/', $id)){
+			return "<div class='error'>" . wfMessage( 'wikitwidget-id-err', htmlspecialchars($id)) . "</div>";
+		}
+
+		## get the name of the twitterer
+		if (isset($args['href']) && $args['href']){
+			$name = $args['href'];
+			$rp = strripos($args['href'],'/');
+			if ($rp)
+			{	$name = substr($args['href'], $rp);
 			}
-			$width = (int)$w;
-			if ($width > 220 && $width < 520)
-			{	$return_txt = $return_txt . ' width="' . $width . '"';
+		}
+		else if(isset($wgWikiTwidgetAccs['name']) && $wgWikiTwidgetAccs['name']){
+			$name = $wgWikiTwidgetAccs['name'];
+		}
+		else {
+			## it will just have to be blank!
+		}
+
+		$txt = '<a class="twitter-timeline" data-widget-id="' . $id . '" href="https://twitter.com/' . $name . '"';
+
+		$vars = array('data-theme', 'data-link-color', 'data-related', 'data-aria-polite', 'width', 'height', 'lang');
+
+		foreach ($vars as $v)
+		{	if (isset($args[$v]) && $args[$v])
+			{	## add to our html tag
+				$txt .= ' ' . $v . '="' . $args[$v] . '"';
 			}
 		}
 
-		if( isset( $args['height'] ) && $args['height'] ) {
-			$h = $args['height'];
-			## height should only contain numbers
-			if (preg_match('/\D/', $h))
-			{	return "<div class='error'>" . wfMessage( 'wikitwidget-h-w-err', htmlspecialchars($h)) . "</div>";
-			}
-			$height = (int)$h;
-			if ($height > 350)
-			{	$return_txt = $return_txt . ' height="' . $height . '"';
-			}
-		}
-		$return_txt = $return_txt . '>Tweets by @gmodproject</a>';
-
-		return $return_txt;
+		$txt = $txt . '>Tweets by @' . $name . '</a>';
+		$wgOut->addModules( 'WikiTwidget' );
+		return $txt;
 	}
 }

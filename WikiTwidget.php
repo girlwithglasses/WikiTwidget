@@ -15,9 +15,6 @@ $wgExtensionCredits['parserhook']['WikiTwidget'] = array(
     'version'=>'0.1'
 );
 
-
-# global $wgExtensionPath;
-
 $wgAutoloadClasses['WikiTwidget'] =  dirname( __FILE__ ) . "/WikiTwidget.body.php";
 $wgExtensionMessagesFiles['WikiTwidget'] = dirname( __FILE__ ) . '/WikiTwidget.i18n.php';
 
@@ -26,8 +23,6 @@ $wgResourceModules['WikiTwidget'] = array(
 'localBasePath' => dirname( __FILE__ ),
 'remoteExtPath' => 'WikiTwidget'
 );
-
-
 
 $wgHooks['ParserFirstCallInit'][] = 'wfWikiTwidgetSetup';
 
