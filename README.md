@@ -48,7 +48,7 @@ Further customization options can be specified when creating the widget; see the
 Troubleshooting
 ===============
 
-WikiTwidget is an extremely simple extension; all it does is convert a "wikitwidget" tag into an "a" tag, and add some javascript to the page. WikiTwidget does some minimal checking of parameters, and will throw up an error if something looks obviously wrong, e.g. if the data-widget-id value is not numerical. The Twitter widget itself created using javascript, so the symptoms of something being amiss will generally be that in place of a widget, you'll see a link saying "Tweets from username". Check that the data-widget-id value is correct, that javascript is enabled in your browser, and that you don't have a browser plugin like Ghostery blocking scripts from another domain.
+WikiTwidget is an extremely simple extension; all it does is convert a "wikitwidget" tag into an "a" tag, and add some javascript to the page. WikiTwidget does some minimal checking of parameters, and will throw up an error if something looks obviously wrong, e.g. if the data-widget-id value is not numerical. The Twitter widget itself created using javascript, so the symptoms of something being amiss will generally be that in place of a widget, you'll see a link saying "Tweets from username" (or "Tweets about ...", "Favourite tweets by ..."). Check that the data-widget-id value is correct, that javascript is enabled in your browser, and that you don't have a browser plugin like Ghostery blocking scripts from another domain. Also ensure that your domain is enabled on your widget (part of the configuration of the Twitter widget).
 
 
 Wiki Compatibility
@@ -59,11 +59,19 @@ WikiTwidget uses ResourceLoader, which was introduced in MW 1.17. I only have ac
 function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
 
 
-Coming Soon!
-============
+Change Log
+==========
 
-Support for the other timeline types: favourites, lists, and searches. I, er, forgot about them.
+v0.2:
+*Removed support for settings in LocalSettings.php
+*Added code to generate an appropriate link tag for favourites, lists, and searches.
 
+
+To Do
+=====
+
+*change percent-encoded characters into the actual characters
+*allow pasting of whole link from Twitter inside the wikitwidget tag?
 
 
 Please email comments, questions, or bug reports to amelia.ireland at gmod.org.
