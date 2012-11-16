@@ -34,18 +34,15 @@ Remove the "a" at the start of the tag and replace it with "wikitwidget", and ad
 
 Insert this tag into the page, and voilà! You can enjoy your embedded Twitter feed on your wiki.
 
-Further customization options can be specified when creating the widget; see the developer documentation on Twitter timelines (https://dev.twitter.com/docs/embedded-timelines) for more information. Valid widget attributes added to the wikitwidget tag will be transferred to the finished widget.
+Further customization options can be specified when creating the widget; see the developer documentation on Twitter timelines (https://dev.twitter.com/docs/embedded-timelines) for more information. Valid widget attributes added to the wikitwidget tag will be transferred to the finished widget. Valid tags are:
 
-WikiTwidgets can also be configured by putting the Twitter widget information in LocalSettings.php. To do this, add the following lines to your LocalSettings.php file:
-
-  $wgWikiTwidgetAccs = array(
-        'name' => 'mycooltwittername',
-        'id' => '123345678901234567890'
-  );
-
-(id should be the value from data-widget-id; name should be your twitter handle)
-
-Note that attributes specified in the wikitwidget tag will be parsed first, and will override any values in the LocalSettings.php file.
+*data-theme (the theme of the widget): light or dark
+*data-link-color (link colour)
+*width (widget width in pixels)
+*height (widget height in pixels)
+*lang (language)
+*data-related (suggest other tweeps to follow)
+*data-aria-polite (settings for users with assistive technology): polite or assertive
 
 
 Troubleshooting
