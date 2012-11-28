@@ -11,8 +11,10 @@ if ( ! defined( 'MEDIAWIKI' ) ) die();
 $wgExtensionCredits['parserhook']['WikiTwidget'] = array(
     'name'=>'WikiTwidget',
     'author'=>'Amelia Ireland',
-    'description'=>'wikitwidget-desc',
-    'version'=>'0.1'
+    'descriptionmsg'=>'wikitwidget-desc',
+    'version'=>'0.2.1',
+    'url' => 'http://www.mediawiki.org/wiki/Extension:WikiTwidget',
+
 );
 
 $wgAutoloadClasses['WikiTwidget'] =  dirname( __FILE__ ) . "/WikiTwidget.body.php";
