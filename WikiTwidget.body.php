@@ -14,7 +14,7 @@ class WikiTwidget {
 			## Error!!
 			return "<div class='error'>" . wfMessage( 'wikitwidget-no-id-err' ) . "</div>";
 		}
-		
+
 		## check that the ID looks OK
 		if (preg_match('/\D/', $id)){
 			return "<div class='error'>" . wfMessage( 'wikitwidget-id-err', htmlspecialchars($id)) . "</div>";
@@ -36,15 +36,15 @@ class WikiTwidget {
 			## make up a string for the link
 
 			## get rid of the 'twitter' part of the URL
-			if (preg_match( '@https://twitter.com/search\?q=(.+)@', $args[href], $matches ))
+			if (preg_match( '@https://twitter.com/search\?q=(.+)@', $args['href'], $matches ))
 			{	## search is for $matches[1]
 				$input = 'Tweets about ' . htmlspecialchars($matches[1]);
 			}
-			else if (preg_match( '@https://twitter.com/(.+?)/favorites@', $args[href], $matches ))
+			else if (preg_match( '@https://twitter.com/(.+?)/favorites@', $args['href'], $matches ))
 			{	## favourite tweets of $matches[1]
 				$input = 'Favourite tweets by ' . htmlspecialchars($matches[1]);
 			}
-			else if (preg_match( '@https://twitter.com/(.+)@', $args[href], $matches ))
+			else if (preg_match( '@https://twitter.com/(.+)@', $args['href'], $matches ))
 			{	## favourite tweets of $matches[1]
 				$input = 'Tweets by ' . htmlspecialchars($matches[1]);
 			}
@@ -62,7 +62,22 @@ class WikiTwidget {
 			$input = 'Twitter timeline';
 		}
 
-		$vars = array('data-theme', 'data-link-color', 'data-related', 'data-aria-polite', 'width', 'height', 'lang');
+# `data-theme` (the theme of the widget): light or dark
+# `data-link-color` (link colour): specify as a hex code, e.g. #00ff99
+# `data-border-color` (border colour): hex code
+# `data-chrome` (widget appearance): add as many of the following as desired, separated by a space:
+## `noheader` - removes the header
+## `nofooter` -  removes footer and Tweet box
+## `noborders` - hides all borders in and around the widget
+## `noscrollbar` - hides main timeline scrollbar
+## `transparent` - no background colour
+# `width` (widget width in pixels)
+# `height` (widget height in pixels)
+# `lang` (language)
+# `data-tweet-limit` (the number of tweets displayed in a timeline; widget will not update with this option on): between 1 and 20
+# `data-related` (suggest other tweeps to follow)
+# `data-aria-polite` (settings for users with assistive technology): polite or assertive
+		$vars = array('data-theme', 'data-link-color', 'data-border-color', 'data-chrome', 'data-tweet-limit', 'data-related', 'data-aria-polite', 'width', 'height', 'lang');
 
 		foreach ($vars as $v)
 		{	if (isset($args[$v]) && $args[$v])
