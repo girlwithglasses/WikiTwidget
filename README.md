@@ -24,11 +24,11 @@ To use WikiTwidget, you need to create a [Twitter widget](https://twitter.com/se
 	<a class="twitter-timeline" href="https://twitter.com/mycooltwittername" data-widget-id="123345678901234567890">Tweets by @mycooltwittername</a>
 	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
-To insert this widget into the page, copy the "a" tag but do not include the text "Tweets by..." or the close tag. You should have some code like this:
+To insert this widget into the page, copy the `a` tag but do not include the text "Tweets by..." or the close tag. You should have some code like this:
 
 	<a class="twitter-timeline" href="https://twitter.com/mycooltwittername" data-widget-id="123345678901234567890">
 
-Remove the "a" at the start of the tag and replace it with "wikitwidget", and add a slash before the final ">".
+Remove the `a` at the start of the tag and replace it with `wikitwidget`, and add a slash before the final ">".
 
 	<wikitwidget class="twitter-timeline" href="https://twitter.com/mycooltwittername" data-widget-id="123345678901234567890" />
 
