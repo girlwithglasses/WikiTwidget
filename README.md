@@ -64,13 +64,16 @@ The Twitter widget itself created using javascript, so the symptoms of something
 Wiki Compatibility
 ------------------
 
-WikiTwidget uses ResourceLoader, which was introduced in MW 1.17. I only have access to a wiki running 1.19.2 and 1.21.1, so I cannot guarantee that WikiTwidget will work on earlier versions of MediaWiki. A quick solution for earlier MediaWikis is to add the javascript to MediaWiki:Common.js on your wiki:
+WikiTwidget uses ResourceLoader, which was introduced in MW 1.17. WikiTwidget has been tested and runs successfully on wikis running 1.19.2, 1.21, 1.22, and 1.23.
 
-	!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
 
 
 Change Log
 ----------
+
+v0.3.1, Jan 2015:
+
+* Updated WikiTwidget javascript to use the latest code from Twitter. Incorporates code changes from MediaWiki Gerrit. Tested on MW 1.25alpha using [mediawiki-vagrant](http://www.mediawiki.org/wiki/MediaWiki-Vagrant).
 
 v0.3.0:
 

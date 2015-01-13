@@ -12,18 +12,18 @@ $wgExtensionCredits['parserhook']['WikiTwidget'] = array(
     'name'=>'WikiTwidget',
     'author'=>'Amelia Ireland',
     'descriptionmsg'=>'wikitwidget-desc',
-    'version'=>'0.2.1',
+    'version'=>'0.3.1',
     'url' => 'http://www.mediawiki.org/wiki/Extension:WikiTwidget',
-
 );
 
-$wgAutoloadClasses['WikiTwidget'] =  dirname( __FILE__ ) . "/WikiTwidget.body.php";
-$wgExtensionMessagesFiles['WikiTwidget'] = dirname( __FILE__ ) . '/WikiTwidget.i18n.php';
+$wgAutoloadClasses['WikiTwidget'] =  __DIR__ . "/WikiTwidget.body.php";
+$wgMessagesDirs['WikiTwidget'] = __DIR__ . '/i18n';
+$wgExtensionMessagesFiles['WikiTwidget'] = __DIR__ . '/WikiTwidget.i18n.php';
 
 $wgResourceModules['WikiTwidget'] = array(
-'scripts' => 'ext.wikitwidget.js',
-'localBasePath' => dirname( __FILE__ ),
-'remoteExtPath' => 'WikiTwidget'
+	'localBasePath' => __DIR__,
+	'remoteExtPath' => 'WikiTwidget',
+	'scripts' => 'ext.wikitwidget.js'
 );
 
 $wgHooks['ParserFirstCallInit'][] = 'wfWikiTwidgetSetup';
@@ -33,4 +33,3 @@ function wfWikiTwidgetSetup( Parser $parser ) {
 	$parser->setHook( 'wikitwidget', array($mm, 'createWidget') );
 	return true;
 }
-
