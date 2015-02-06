@@ -23,7 +23,9 @@ class WikiTwidget {
 				wfMessage( 'wikitwidget-id-err', $id )->inContentLanguage()->text() );
 		}
 
-		$txt = '<a class="twitter-timeline" data-widget-id="' . $id . '"';
+		$attribs = array();
+		$attribs['class'] = "twitter-timeline";
+		$attribs['data-widget-id'] = $id;
 
 ## Lists:
 ## <a class="twitter-timeline" href="https://twitter.com/USERNAME/LIST-NAME" data-widget-id="268946990140887041">Tweets from @USERNAME/LIST-NAME</a>
@@ -41,28 +43,29 @@ class WikiTwidget {
 			## get rid of the 'twitter' part of the URL
 			if (preg_match( '@https://twitter.com/search\?q=(.+)@', $args['href'], $matches )) {
 				## search is for $matches[1]
-				$input = 'Tweets about ' . htmlspecialchars($matches[1]);
+				$text = 'Tweets about ' . htmlspecialchars($matches[1]);
+				$attribs['href'] = $args['href'];
 			}
 			else if (preg_match( '@https://twitter.com/(.+?)/favorites@', $args['href'], $matches )) {
 				## favourite tweets of $matches[1]
-				$input = 'Favourite tweets by ' . htmlspecialchars($matches[1]);
+				$text = 'Favourite tweets by ' . htmlspecialchars($matches[1]);
+				$attribs['href'] = $args['href'];
 			}
 			else if (preg_match( '@https://twitter.com/(.+)@', $args['href'], $matches )) {
 				## tweets by $matches[1]
-				$input = 'Tweets by ' . htmlspecialchars($matches[1]);
+				$text = 'Tweets by ' . htmlspecialchars($matches[1]);
+				$attribs['href'] = $args['href'];
 			}
 			else {
 				## wtf is going on with this href?!
-				$input = 'Twitter timeline';
-				$args['href'] = 'https://twitter.com/';
+				$text = 'Twitter timeline';
+				$attribs['href'] = 'https://twitter.com/';
 			}
-			## we have an input. Woohoo!
-			$txt .= ' href="' . $args['href'] . '"';
 		}
 		else {
 			## it will just have to be blank!
-			$txt .= ' href="https://twitter.com/"';
-			$input = 'Twitter timeline';
+			$text = 'Twitter timeline';
+			$attribs['href'] = 'https://twitter.com/';
 		}
 
 # `data-theme` (the theme of the widget): light or dark
@@ -85,12 +88,13 @@ class WikiTwidget {
 		foreach ($vars as $v) {
 			if (isset($args[$v]) && $args[$v]) {
 				## add to our html tag
-				$txt .= ' ' . $v . '="' . $args[$v] . '"';
+				$attribs[$v] = $args[$v];
 			}
 		}
 
-		$txt = $txt . '>' . $input . '</a>';
 		$parser->getOutput()->addModules( 'ext.WikiTwidget' );
-		return $txt;
+		return Html::element( 'a',
+			$attribs,
+			$text );
 	}
 }
