@@ -11,12 +11,16 @@ class WikiTwidget {
 		}
 		else {
 			## Error!!
-			return "<div class='error'>" . wfMessage( 'wikitwidget-no-id-err' ) . "</div>";
+			return Html::element( 'div',
+				array( 'class' => 'error' ),
+				wfMessage( 'wikitwidget-no-id-err' )->inContentLanguage()->text() );
 		}
 
 		## check that the ID looks OK
 		if (preg_match('/\D/', $id)){
-			return "<div class='error'>" . wfMessage( 'wikitwidget-id-err', htmlspecialchars($id)) . "</div>";
+			return Html::element( 'div',
+				array( 'class' => 'error' ),
+				wfMessage( 'wikitwidget-id-err', $id )->inContentLanguage()->text() );
 		}
 
 		$txt = '<a class="twitter-timeline" data-widget-id="' . $id . '"';
