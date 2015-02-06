@@ -86,7 +86,7 @@ class WikiTwidget {
 		}
 
 		$txt = $txt . '>' . $input . '</a>';
-		$parser->getOutput()->addModules( 'WikiTwidget' );
+		$parser->getOutput()->addModules( 'ext.WikiTwidget' );
 		return $txt;
 	}
 }

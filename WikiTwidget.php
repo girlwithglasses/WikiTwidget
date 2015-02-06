@@ -20,7 +20,7 @@ $wgAutoloadClasses['WikiTwidget'] =  __DIR__ . "/WikiTwidget.body.php";
 $wgMessagesDirs['WikiTwidget'] = __DIR__ . '/i18n';
 $wgExtensionMessagesFiles['WikiTwidget'] = __DIR__ . '/WikiTwidget.i18n.php';
 
-$wgResourceModules['WikiTwidget'] = array(
+$wgResourceModules['ext.WikiTwidget'] = array(
 	'localBasePath' => __DIR__,
 	'remoteExtPath' => 'WikiTwidget',
 	'scripts' => 'ext.wikitwidget.js'
