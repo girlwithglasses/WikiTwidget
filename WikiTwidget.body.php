@@ -48,7 +48,7 @@ class WikiTwidget {
 				$input = 'Favourite tweets by ' . htmlspecialchars($matches[1]);
 			}
 			else if (preg_match( '@https://twitter.com/(.+)@', $args['href'], $matches )) {
-				## favourite tweets of $matches[1]
+				## tweets by $matches[1]
 				$input = 'Tweets by ' . htmlspecialchars($matches[1]);
 			}
 			else {
