@@ -13,7 +13,7 @@ $wgExtensionCredits['parserhook']['WikiTwidget'] = array(
     'author'=>'Amelia Ireland',
     'descriptionmsg'=>'wikitwidget-desc',
     'version'=>'0.3.1',
-    'url' => 'http://www.mediawiki.org/wiki/Extension:WikiTwidget',
+    'url' => 'https://www.mediawiki.org/wiki/Extension:WikiTwidget',
 );
 
 $wgAutoloadClasses['WikiTwidget'] =  __DIR__ . "/WikiTwidget.body.php";
