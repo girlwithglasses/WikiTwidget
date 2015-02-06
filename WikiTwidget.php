@@ -12,7 +12,7 @@ $wgExtensionCredits['parserhook']['WikiTwidget'] = array(
     'name'=>'WikiTwidget',
     'author'=>'Amelia Ireland',
     'descriptionmsg'=>'wikitwidget-desc',
-    'version'=>'0.3.1',
+    'version'=>'0.3.2',
     'url' => 'https://www.mediawiki.org/wiki/Extension:WikiTwidget',
 );
 

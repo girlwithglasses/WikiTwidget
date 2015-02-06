@@ -71,6 +71,13 @@ WikiTwidget uses ResourceLoader, which was introduced in MW 1.17. WikiTwidget ha
 Change Log
 ----------
 
+v0.3.2, Feb 2015:
+
+* Fixed issues with Widget script not running when page is loaded from the parser cache.
+* Closed an XSS vector in the extension.
+* Made link text translatable.
+* Cleaned up code and fixed a few minor bugs.
+
 v0.3.1, Jan 2015:
 
 * Updated WikiTwidget javascript to use the latest code from Twitter. Incorporates code changes from MediaWiki Gerrit. Tested on MW 1.25alpha using [mediawiki-vagrant](http://www.mediawiki.org/wiki/MediaWiki-Vagrant).
