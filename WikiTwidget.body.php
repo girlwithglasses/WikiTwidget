@@ -3,8 +3,6 @@
 class WikiTwidget {
 
 	function createWidget($input, array $args, Parser $parser, PPFrame $frame ) {
-		global $wgOut;
-
 #		Widget URL format
 #		<a class="twitter-timeline" href="https://twitter.com/twitterapi" data-widget-id="YOUR-WIDGET-ID-HERE" data-theme="dark" data-link-color="#cc0000"  data-related="twitterapi,twitter" data-aria-polite="assertive" width="300" height="500" lang="EN">Tweets by @twitterapi</a>
 
@@ -88,7 +86,7 @@ class WikiTwidget {
 		}
 
 		$txt = $txt . '>' . $input . '</a>';
-		$wgOut->addModules( 'WikiTwidget' );
+		$parser->getOutput()->addModules( 'WikiTwidget' );
 		return $txt;
 	}
 }
