@@ -43,28 +43,28 @@ class WikiTwidget {
 			## get rid of the 'twitter' part of the URL
 			if (preg_match( '@https://twitter.com/search\?q=(.+)@', $args['href'], $matches )) {
 				## search is for $matches[1]
-				$text = 'Tweets about ' . htmlspecialchars($matches[1]);
+				$text = wfMessage( 'wikitwidget-alt-search', $matches[1] )->inContentLanguage()->text();
 				$attribs['href'] = $args['href'];
 			}
 			else if (preg_match( '@https://twitter.com/(.+?)/favorites@', $args['href'], $matches )) {
 				## favourite tweets of $matches[1]
-				$text = 'Favourite tweets by ' . htmlspecialchars($matches[1]);
+				$text = wfMessage( 'wikitwidget-alt-favorites', $matches[1] )->inContentLanguage()->text();
 				$attribs['href'] = $args['href'];
 			}
 			else if (preg_match( '@https://twitter.com/(.+)@', $args['href'], $matches )) {
 				## tweets by $matches[1]
-				$text = 'Tweets by ' . htmlspecialchars($matches[1]);
+				$text = wfMessage( 'wikitwidget-alt-feed', $matches[1] )->inContentLanguage()->text();
 				$attribs['href'] = $args['href'];
 			}
 			else {
 				## wtf is going on with this href?!
-				$text = 'Twitter timeline';
+				$text = wfMessage( 'wikitwidget-alt-fallback' )->inContentLanguage()->text();
 				$attribs['href'] = 'https://twitter.com/';
 			}
 		}
 		else {
 			## it will just have to be blank!
-			$text = 'Twitter timeline';
+			$text = wfMessage( 'wikitwidget-alt-fallback' )->inContentLanguage()->text();
 			$attribs['href'] = 'https://twitter.com/';
 		}
 
