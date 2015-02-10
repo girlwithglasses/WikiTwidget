@@ -1,0 +1,15 @@
+{
+    "@metadata": {
+        "authors": [
+            "Daniel Friesen"
+        ]
+    },
+    "wikitwidget-desc": "{{desc|name=WikiTwidget|url=https://www.mediawiki.org/wiki/Extension:WikiTwidget}}",
+    "wikitwidget-h-w-err": "Used as error message.\n Parameters:\n* $1 - height/width\n\nSee also:\n* {{msg-mw|wikitwidget-id-err}}\n* {{msg-mw|wikitwidget-no-id-err}}",
+    "wikitwidget-id-err": "Used as error message.\n Parameters:\n* $1 - id\n\nSee also:\n* {{msg-mw|wikitwidget-h-w-err}}\n* {{msg-mw|wikitwidget-no-id-err}}",
+    "wikitwidget-no-id-err": "Used as error message.\n\nSee also:\n* {{msg-mw|wikitwidget-h-w-err}}\n* {{msg-mw|wikitwidget-id-err}}",
+    "wikitwidget-alt-search": "Used as fallback link text for search widgets.\n\nSee also:\n* {{msg-mw|wikitwidget-alt-favorites}}\n* {{msg-mw|wikitwidget-alt-feed}}\n* {{msg-mw|wikitwidget-alt-fallback}}",
+    "wikitwidget-alt-favorites": "Used as fallback link text for favorite tweet widgets.\n\nSee also:\n* {{msg-mw|wikitwidget-alt-search}}\n* {{msg-mw|wikitwidget-alt-feed}}\n* {{msg-mw|wikitwidget-alt-fallback}}",
+    "wikitwidget-alt-feed": "Used as fallback link text for feed widgets.\n\nSee also:\n* {{msg-mw|wikitwidget-alt-search}}\n* {{msg-mw|wikitwidget-alt-favorites}}\n* {{msg-mw|wikitwidget-alt-fallback}}",
+    "wikitwidget-alt-fallback": "Used as fallback link text for unknown widgets.\n\nSee also:\n* {{msg-mw|wikitwidget-alt-search}}\n* {{msg-mw|wikitwidget-alt-favorites}}\n* {{msg-mw|wikitwidget-alt-feed}}"
+}

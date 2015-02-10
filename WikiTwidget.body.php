@@ -3,8 +3,6 @@
 class WikiTwidget {
 
 	function createWidget($input, array $args, Parser $parser, PPFrame $frame ) {
-		global $wgOut;
-
 #		Widget URL format
 #		<a class="twitter-timeline" href="https://twitter.com/twitterapi" data-widget-id="YOUR-WIDGET-ID-HERE" data-theme="dark" data-link-color="#cc0000"  data-related="twitterapi,twitter" data-aria-polite="assertive" width="300" height="500" lang="EN">Tweets by @twitterapi</a>
 
@@ -13,15 +11,21 @@ class WikiTwidget {
 		}
 		else {
 			## Error!!
-			return "<div class='error'>" . wfMessage( 'wikitwidget-no-id-err' ) . "</div>";
+			return Html::element( 'div',
+				array( 'class' => 'error' ),
+				wfMessage( 'wikitwidget-no-id-err' )->inContentLanguage()->text() );
 		}
 
 		## check that the ID looks OK
 		if (preg_match('/\D/', $id)){
-			return "<div class='error'>" . wfMessage( 'wikitwidget-id-err', htmlspecialchars($id)) . "</div>";
+			return Html::element( 'div',
+				array( 'class' => 'error' ),
+				wfMessage( 'wikitwidget-id-err', $id )->inContentLanguage()->text() );
 		}
 
-		$txt = '<a class="twitter-timeline" data-widget-id="' . $id . '"';
+		$attribs = array();
+		$attribs['class'] = "twitter-timeline";
+		$attribs['data-widget-id'] = $id;
 
 ## Lists:
 ## <a class="twitter-timeline" href="https://twitter.com/USERNAME/LIST-NAME" data-widget-id="268946990140887041">Tweets from @USERNAME/LIST-NAME</a>
@@ -39,28 +43,29 @@ class WikiTwidget {
 			## get rid of the 'twitter' part of the URL
 			if (preg_match( '@https://twitter.com/search\?q=(.+)@', $args['href'], $matches )) {
 				## search is for $matches[1]
-				$input = 'Tweets about ' . htmlspecialchars($matches[1]);
+				$text = wfMessage( 'wikitwidget-alt-search', $matches[1] )->inContentLanguage()->text();
+				$attribs['href'] = $args['href'];
 			}
 			else if (preg_match( '@https://twitter.com/(.+?)/favorites@', $args['href'], $matches )) {
 				## favourite tweets of $matches[1]
-				$input = 'Favourite tweets by ' . htmlspecialchars($matches[1]);
+				$text = wfMessage( 'wikitwidget-alt-favorites', $matches[1] )->inContentLanguage()->text();
+				$attribs['href'] = $args['href'];
 			}
 			else if (preg_match( '@https://twitter.com/(.+)@', $args['href'], $matches )) {
-				## favourite tweets of $matches[1]
-				$input = 'Tweets by ' . htmlspecialchars($matches[1]);
+				## tweets by $matches[1]
+				$text = wfMessage( 'wikitwidget-alt-feed', $matches[1] )->inContentLanguage()->text();
+				$attribs['href'] = $args['href'];
 			}
 			else {
 				## wtf is going on with this href?!
-				$input = 'Twitter timeline';
-				$args['href'] = 'https://twitter.com/';
+				$text = wfMessage( 'wikitwidget-alt-fallback' )->inContentLanguage()->text();
+				$attribs['href'] = 'https://twitter.com/';
 			}
-			## we have an input. Woohoo!
-			$txt .= ' href="' . $args['href'] . '"';
 		}
 		else {
 			## it will just have to be blank!
-			$txt .= ' href="https://twitter.com/"';
-			$input = 'Twitter timeline';
+			$text = wfMessage( 'wikitwidget-alt-fallback' )->inContentLanguage()->text();
+			$attribs['href'] = 'https://twitter.com/';
 		}
 
 # `data-theme` (the theme of the widget): light or dark
@@ -83,12 +88,13 @@ class WikiTwidget {
 		foreach ($vars as $v) {
 			if (isset($args[$v]) && $args[$v]) {
 				## add to our html tag
-				$txt .= ' ' . $v . '="' . $args[$v] . '"';
+				$attribs[$v] = $args[$v];
 			}
 		}
 
-		$txt = $txt . '>' . $input . '</a>';
-		$wgOut->addModules( 'WikiTwidget' );
-		return $txt;
+		$parser->getOutput()->addModules( 'ext.WikiTwidget' );
+		return Html::element( 'a',
+			$attribs,
+			$text );
 	}
 }
